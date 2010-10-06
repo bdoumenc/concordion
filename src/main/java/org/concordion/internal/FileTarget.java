@@ -32,7 +32,7 @@ public class FileTarget implements Target {
         if (outputFile.exists() && isFreshEnough(outputFile)) {
             return;
         }
-        IOUtil.copy(inputStream, getOutputStream(resource));
+        IOUtil.copy(inputStream, createOutputStream(resource));
     }
 
     public void delete(Resource resource) throws IOException {
@@ -59,7 +59,13 @@ public class FileTarget implements Target {
         return new File(baseDir, resource.getPath());
     }
     
-    public OutputStream getOutputStream(Resource resource) throws FileNotFoundException {
+    public OutputStream getOutputStream(Resource resource) throws IOException {
+        Check.notNull(resource, "resource is null");
+        mkdirs(resource);
+        return createOutputStream(resource);
+    }
+
+    private OutputStream createOutputStream(Resource resource) throws FileNotFoundException {
         return new FileOutputStream(getFile(resource));
     }
     
