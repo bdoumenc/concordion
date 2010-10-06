@@ -1,6 +1,5 @@
 package org.concordion.api;
 
-import org.concordion.internal.CommandCall;
 
 public interface Command {
 

@@ -1,11 +1,14 @@
 package org.concordion.internal.command;
 
 import org.concordion.api.Command;
+import org.concordion.api.CommandCall;
 import org.concordion.api.Element;
 import org.concordion.api.Evaluator;
 import org.concordion.api.Result;
 import org.concordion.api.ResultRecorder;
-import org.concordion.internal.CommandCall;
+import org.concordion.api.command.AbstractCommandDecorator;
+import org.concordion.api.command.ThrowableCaughtEvent;
+import org.concordion.api.command.ThrowableCaughtListener;
 import org.concordion.internal.util.Announcer;
 
 public class ThrowableCatchingDecorator extends AbstractCommandDecorator {

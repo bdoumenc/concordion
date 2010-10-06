@@ -1,10 +1,11 @@
 package org.concordion.internal.command;
 
 import org.concordion.api.Command;
+import org.concordion.api.CommandCall;
 import org.concordion.api.Element;
 import org.concordion.api.Evaluator;
 import org.concordion.api.ResultRecorder;
-import org.concordion.internal.CommandCall;
+import org.concordion.api.command.AbstractCommandDecorator;
 
 public class LocalTextDecorator extends AbstractCommandDecorator {
 

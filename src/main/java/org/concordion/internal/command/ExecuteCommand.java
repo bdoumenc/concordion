@@ -1,14 +1,29 @@
 package org.concordion.internal.command;
 
+import org.concordion.api.CommandCall;
+import org.concordion.api.CommandCallList;
+import org.concordion.api.Element;
 import org.concordion.api.Evaluator;
 import org.concordion.api.ResultRecorder;
-import org.concordion.internal.CommandCall;
-import org.concordion.internal.CommandCallList;
+import org.concordion.api.command.AbstractCommand;
+import org.concordion.api.command.ExecuteEvent;
+import org.concordion.api.command.ExecuteListener;
 import org.concordion.internal.Row;
 import org.concordion.internal.TableSupport;
+import org.concordion.internal.util.Announcer;
 
 public class ExecuteCommand extends AbstractCommand {
 
+    private Announcer<ExecuteListener> listeners = Announcer.to(ExecuteListener.class);
+
+    public void addExecuteListener(ExecuteListener listener) {
+        listeners.addListener(listener);
+    }
+
+    public void removeExecuteListener(ExecuteListener listener) {
+        listeners.removeListener(listener);
+    }
+    
     @Override
     public void execute(CommandCall commandCall, Evaluator evaluator, ResultRecorder resultRecorder) {
         Strategy strategy;
@@ -32,6 +47,7 @@ public class ExecuteCommand extends AbstractCommand {
             childCommands.setUp(evaluator, resultRecorder);
             evaluator.evaluate(commandCall.getExpression());
             childCommands.execute(evaluator, resultRecorder);
+            announceExecuteCompleted(commandCall.getElement());
             childCommands.verify(evaluator, resultRecorder);
         }
     }
@@ -50,9 +66,10 @@ public class ExecuteCommand extends AbstractCommand {
                 commandCall.execute(evaluator, resultRecorder);
             }
         }
-        
-        
-    
     }
     
+    private void announceExecuteCompleted(Element element) {
+        listeners.announce().executeCompleted(new ExecuteEvent(element));
+    }
+
 }

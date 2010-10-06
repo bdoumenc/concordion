@@ -11,17 +11,17 @@ import org.concordion.api.RunnerResult;
 public class ExampleRunner implements Runner {
 
     private static Map<String, String> mappings = new LinkedHashMap<String, String>();
-	
-	public RunnerResult execute(Resource resource, String href) throws Exception {
-	    
-	    for (String regex : mappings.keySet()) {
-	        if (href.matches(regex)) {
-	            return new RunnerResult(Result.valueOf(mappings.get(regex)));
-	        }
-	    }
-	    
-		throw new RuntimeException("No mapping found for '" + href + "'.");
-	}
+    
+    public RunnerResult execute(Resource resource, String href) throws Exception {
+        
+        for (String regex : mappings.keySet()) {
+            if (href.matches(regex)) {
+                return new RunnerResult(Result.valueOf(mappings.get(regex)));
+            }
+        }
+        
+        throw new RuntimeException("No mapping found for '" + href + "'.");
+    }
 
     public static void clear() {
         mappings.clear();

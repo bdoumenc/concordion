@@ -1,5 +1,6 @@
 package org.concordion.internal;
 
+import org.concordion.api.CommandCall;
 import org.concordion.api.Evaluator;
 import org.concordion.api.ResultRecorder;
 import org.concordion.api.Specification;

@@ -15,6 +15,7 @@ public class TestRig {
     private Object fixture = null;
     private EvaluatorFactory evaluatorFactory = new SimpleEvaluatorFactory();
     private StubSource stubSource = new StubSource();
+    private StubTarget stubTarget;
 
     public TestRig withFixture(Object fixture) {
         this.fixture = fixture;
@@ -27,7 +28,7 @@ public class TestRig {
 
     public ProcessingResult process(Resource resource) {
         EventRecorder eventRecorder = new EventRecorder();
-        StubTarget stubTarget = new StubTarget();
+        stubTarget = new StubTarget();
         Concordion concordion = new ConcordionBuilder()
             .withAssertEqualsListener(eventRecorder)
             .withThrowableListener(eventRecorder)
@@ -71,5 +72,9 @@ public class TestRig {
     public TestRig withResource(Resource resource, String content) {
         stubSource.addResource(resource, content);
         return this;
+    }
+    
+    public boolean hasCopiedResource(Resource resource) {
+        return stubTarget.hasCopiedResource(resource);
     }
 }

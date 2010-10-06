@@ -6,8 +6,8 @@ import java.util.Set;
 import ognl.OgnlException;
 
 import org.concordion.api.Element;
-import org.concordion.internal.command.ThrowableCaughtEvent;
-import org.concordion.internal.command.ThrowableCaughtListener;
+import org.concordion.api.command.ThrowableCaughtEvent;
+import org.concordion.api.command.ThrowableCaughtListener;
 import org.concordion.internal.util.Check;
 import org.concordion.internal.util.IOUtil;
 

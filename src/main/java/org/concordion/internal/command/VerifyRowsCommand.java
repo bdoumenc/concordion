@@ -5,11 +5,16 @@ import java.util.LinkedHashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.concordion.api.CommandCall;
 import org.concordion.api.Element;
 import org.concordion.api.Evaluator;
 import org.concordion.api.Result;
 import org.concordion.api.ResultRecorder;
-import org.concordion.internal.CommandCall;
+import org.concordion.api.command.AbstractCommand;
+import org.concordion.api.command.ExpressionEvaluatedEvent;
+import org.concordion.api.command.MissingRowEvent;
+import org.concordion.api.command.SurplusRowEvent;
+import org.concordion.api.command.VerifyRowsListener;
 import org.concordion.internal.Row;
 import org.concordion.internal.TableSupport;
 import org.concordion.internal.util.Announcer;
@@ -45,9 +50,10 @@ public class VerifyRowsCommand extends AbstractCommand {
         Iterable<Object> iterable = (Iterable<Object>) obj;
         
         TableSupport tableSupport = new TableSupport(commandCall);
-        
         Row[] detailRows = tableSupport.getDetailRows();
 
+        announceExpressionEvaluated(commandCall.getElement());
+        
         int index = 0;
         for (Object loopVar : iterable) {
             evaluator.setVariable(loopVariableName, loopVar);
@@ -70,6 +76,10 @@ public class VerifyRowsCommand extends AbstractCommand {
         }
     }
     
+    private void announceExpressionEvaluated(Element element) {
+        listeners.announce().expressionEvaluated(new ExpressionEvaluatedEvent(element));
+    }
+
     private void announceMissingRow(Element element) {
         listeners.announce().missingRow(new MissingRowEvent(element));
     }

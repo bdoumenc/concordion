@@ -3,9 +3,9 @@ package org.concordion.internal.listener;
 import java.io.IOException;
 
 import org.concordion.api.Target;
+import org.concordion.api.command.SpecificationProcessingEvent;
+import org.concordion.api.command.SpecificationProcessingListener;
 import org.concordion.internal.FileTarget;
-import org.concordion.internal.command.SpecificationProcessingEvent;
-import org.concordion.internal.command.SpecificationProcessingListener;
 
 public class SpecificationExporter implements SpecificationProcessingListener {
 

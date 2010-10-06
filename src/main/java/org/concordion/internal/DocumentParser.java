@@ -5,6 +5,7 @@ import nu.xom.Document;
 import nu.xom.Elements;
 
 import org.concordion.api.Command;
+import org.concordion.api.CommandCall;
 import org.concordion.api.CommandFactory;
 import org.concordion.api.Element;
 import org.concordion.api.Resource;

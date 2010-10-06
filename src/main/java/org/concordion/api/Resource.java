@@ -61,9 +61,8 @@ public final class Resource {
         // Find common stem and ignore it
         // Use ../ to move up the path from here to common stem
         // Append the rest of the path from resource
-
-        String[] therePieces = resource.getPackage().getPath().split("/");
-        String[] herePieces = getPackage().getPath().split("/");
+        String[] therePieces = resource.getPathPieces();
+        String[] herePieces = getPathPieces();
 
         int sharedPiecesCount = 0;
         for (int i = 0; i < herePieces.length; i++) {
@@ -91,6 +90,14 @@ public final class Resource {
             return r;
         }
         return r + resource.getName();
+    }
+
+    private String[] getPathPieces() {
+        String packagePath = getPackage().getPath();
+        if ("/".equals(packagePath)) {
+            return new String[]{""};
+        }
+        return packagePath.split("/");
     }
 
     public String getName() {

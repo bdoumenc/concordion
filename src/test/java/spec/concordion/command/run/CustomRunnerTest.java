@@ -24,9 +24,9 @@ public class CustomRunnerTest {
         ExampleRunner.addMapping(regex, result);
     }
     
-	public String getResult(String fragment, String href) {
-	    fragment = fragment.replaceFirst("href=\"href\"", "href=\"" + href + "\"");
-	    
+    public String getResult(String fragment, String href) {
+        fragment = fragment.replaceFirst("href=\"href\"", "href=\"" + href + "\"");
+        
         String xml = new TestRig()
             .processFragment(fragment)
             .getOutputFragmentXML();

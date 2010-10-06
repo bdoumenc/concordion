@@ -1,12 +1,16 @@
 package org.concordion.internal.listener;
 
 import org.concordion.api.Element;
-import org.concordion.internal.command.MissingRowEvent;
-import org.concordion.internal.command.SurplusRowEvent;
-import org.concordion.internal.command.VerifyRowsListener;
+import org.concordion.api.command.ExpressionEvaluatedEvent;
+import org.concordion.api.command.MissingRowEvent;
+import org.concordion.api.command.SurplusRowEvent;
+import org.concordion.api.command.VerifyRowsListener;
 
 public class VerifyRowsResultRenderer implements VerifyRowsListener {
 
+    public void expressionEvaluated(ExpressionEvaluatedEvent event) {
+    }
+    
     public void missingRow(MissingRowEvent event) {
         Element element = event.getRowElement();
         element.addStyleClass("missing");

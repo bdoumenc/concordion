@@ -1,5 +1,7 @@
 package org.concordion.internal.command;
 
+import org.concordion.api.command.ThrowableCaughtEvent;
+import org.concordion.api.command.ThrowableCaughtListener;
 import org.concordion.internal.util.Announcer;
 
 public class ThrowableCaughtPublisher implements ThrowableCaughtListener {

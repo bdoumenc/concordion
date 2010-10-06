@@ -1,9 +1,9 @@
 package org.concordion.internal.listener;
 
-import org.concordion.internal.RunListener;
-import org.concordion.internal.command.RunFailureEvent;
-import org.concordion.internal.command.RunIgnoreEvent;
-import org.concordion.internal.command.RunSuccessEvent;
+import org.concordion.api.command.RunFailureEvent;
+import org.concordion.api.command.RunIgnoreEvent;
+import org.concordion.api.command.RunListener;
+import org.concordion.api.command.RunSuccessEvent;
 
 public class RunResultRenderer extends ThrowableRenderer implements RunListener {
 

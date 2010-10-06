@@ -72,6 +72,10 @@ public final class Element {
         xomElement.appendChild(element.xomElement);
     }
 
+    public void removeChild(Element element) {
+        xomElement.removeChild(element.xomElement);
+    }
+    
     private Node[] getChildNodes() {
         Node[] childNodes = new Node[xomElement.getChildCount()];
         for (int i = 0; i < xomElement.getChildCount(); i++) {
@@ -101,6 +105,26 @@ public final class Element {
         return xomElement.getAttributeValue(name);
     }
     
+    public String getAttributeValue(String localName, String namespaceURI) {
+        return xomElement.getAttributeValue(localName, namespaceURI);
+    }
+
+    public void removeAttribute(String name) {
+        xomElement.removeAttribute(xomElement.getAttribute(name));
+    }
+    
+    public void removeAttribute(String localName, String namespaceURI) {
+        xomElement.removeAttribute(xomElement.getAttribute(localName, namespaceURI));
+    }
+    
+    public void moveAttributesTo(Element element) {
+        for (int i=0; i<xomElement.getAttributeCount(); i++) {
+            Attribute attribute = xomElement.getAttribute(i);
+            xomElement.removeAttribute(attribute);
+            element.xomElement.addAttribute(attribute);
+        }
+    }
+
     private boolean isBlank() {
         return getText().trim().equals("");
     }

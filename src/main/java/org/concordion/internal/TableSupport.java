@@ -3,6 +3,8 @@ package org.concordion.internal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.concordion.api.CommandCall;
+import org.concordion.api.CommandCallList;
 import org.concordion.api.Element;
 
 public class TableSupport {

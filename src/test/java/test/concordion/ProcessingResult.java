@@ -4,8 +4,8 @@ import nu.xom.Document;
 
 import org.concordion.api.Element;
 import org.concordion.api.ResultSummary;
+import org.concordion.api.command.AssertFailureEvent;
 import org.concordion.internal.XMLParser;
-import org.concordion.internal.command.AssertEqualsFailureEvent;
 
 public class ProcessingResult {
 
@@ -31,8 +31,8 @@ public class ProcessingResult {
         return resultSummary.getExceptionCount();
     }
     
-    public AssertEqualsFailureEvent getLastAssertEqualsFailureEvent() {
-        return (AssertEqualsFailureEvent) eventRecorder.getLast(AssertEqualsFailureEvent.class);
+    public AssertFailureEvent getLastAssertFailureEvent() {
+        return (AssertFailureEvent) eventRecorder.getLast(AssertFailureEvent.class);
     }
 
     public Document getXOMDocument() {
@@ -69,5 +69,53 @@ public class ProcessingResult {
 
     public String getOutputFragmentXML() {
         return getOutputFragment().toXML().replaceAll("</?fragment>", "").replaceAll("\u00A0", "&#160;");
+    }
+
+    public boolean hasCSSDeclaration(String cssFilename) {
+        Element head = getRootElement().getFirstChildElement("head");
+        for (Element link : head.getChildElements("link")) {
+            String href = link.getAttributeValue("href");
+            String type = link.getAttributeValue("type");
+            String rel = link.getAttributeValue("rel");
+            if (cssFilename.equals(href) 
+                    && "text/css".equals(type)
+                    && "stylesheet".equals(rel)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasEmbeddedCSS(String css) {
+        Element head = getRootElement().getFirstChildElement("head");
+        for (Element style : head.getChildElements("style")) {
+            if (style.getText().contains(css) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasJavaScriptDeclaration(String cssFilename) {
+        Element head = getRootElement().getFirstChildElement("head");
+        for (Element script : head.getChildElements("script")) {
+            String type = script.getAttributeValue("type");
+            String src = script.getAttributeValue("src");
+            if ("text/javascript".equals(type) && cssFilename.equals(src)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasEmbeddedJavaScript(String javaScript) {
+        Element head = getRootElement().getFirstChildElement("head");
+        for (Element script : head.getChildElements("script")) {
+            String type = script.getAttributeValue("type");
+            if ("text/javascript".equals(type) && script.getText().contains(javaScript)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

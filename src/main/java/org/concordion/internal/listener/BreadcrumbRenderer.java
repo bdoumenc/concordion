@@ -9,9 +9,9 @@ import nu.xom.Document;
 import org.concordion.api.Element;
 import org.concordion.api.Resource;
 import org.concordion.api.Source;
+import org.concordion.api.command.SpecificationProcessingEvent;
+import org.concordion.api.command.SpecificationProcessingListener;
 import org.concordion.internal.XMLParser;
-import org.concordion.internal.command.SpecificationProcessingEvent;
-import org.concordion.internal.command.SpecificationProcessingListener;
 
 public class BreadcrumbRenderer implements SpecificationProcessingListener {
 

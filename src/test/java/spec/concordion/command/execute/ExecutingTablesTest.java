@@ -1,7 +1,7 @@
 package spec.concordion.command.execute;
 
+import org.concordion.api.command.AssertFailureEvent;
 import org.concordion.integration.junit3.ConcordionTestCase;
-import org.concordion.internal.command.AssertEqualsFailureEvent;
 
 import test.concordion.ProcessingResult;
 import test.concordion.TestRig;
@@ -19,7 +19,7 @@ public class ExecutingTablesTest extends ConcordionTestCase {
         result.failureCount = r.getFailureCount();
         result.exceptionCount = r.getExceptionCount();
         
-        AssertEqualsFailureEvent lastEvent = r.getLastAssertEqualsFailureEvent();
+        AssertFailureEvent lastEvent = r.getLastAssertFailureEvent();
         if (lastEvent != null) {
             result.lastActualValue = lastEvent.getActual();
             result.lastExpectedValue = lastEvent.getExpected();

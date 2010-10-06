@@ -59,7 +59,7 @@ public class FileTarget implements Target {
         return new File(baseDir, resource.getPath());
     }
     
-    private OutputStream getOutputStream(Resource resource) throws FileNotFoundException {
+    public OutputStream getOutputStream(Resource resource) throws FileNotFoundException {
         return new FileOutputStream(getFile(resource));
     }
     
@@ -71,5 +71,9 @@ public class FileTarget implements Target {
     private boolean isFreshEnough(File outputFile) {
         long ageInMillis = Math.abs(outputFile.lastModified() - System.currentTimeMillis());
         return ageInMillis < FRESH_ENOUGH_MILLIS;
+    }
+
+    public boolean exists(Resource resource) {
+        return getFile(resource).exists();        
     }
 }
