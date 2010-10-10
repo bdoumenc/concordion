@@ -35,6 +35,7 @@ public enum FixtureState {
 
         @Override
         public void printNote(PrintStream out) {
+            out.print("   <-- ERROR: Specification is marked as unimplemented, but has an implemention.");
         }
     },
     EXPECTED_TO_FAIL {
