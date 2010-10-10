@@ -26,6 +26,7 @@ import org.concordion.api.command.ThrowableCaughtListener;
 import org.concordion.api.command.VerifyRowsListener;
 import org.concordion.api.extension.ConcordionExtender;
 import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.api.extension.ConcordionExtensionFactory;
 import org.concordion.internal.command.AssertEqualsCommand;
 import org.concordion.internal.command.AssertFalseCommand;
 import org.concordion.internal.command.AssertTrueCommand;
@@ -286,7 +287,14 @@ public class ConcordionBuilder implements ConcordionExtender {
         try {
             extension = (ConcordionExtension) extensionObject;
         } catch (ClassCastException e) {
-            throw new RuntimeException("Extension '" + className + "' must implement ConcordionExtension", e);
+            try {
+                ConcordionExtensionFactory factory = (ConcordionExtensionFactory) extensionObject;
+                extension = factory.createExtension();
+            } catch (ClassCastException e1) {
+                String message = String.format("Extension class '%s' must implement '%s' or '%s'", className,
+                        ConcordionExtension.class.getName(), ConcordionExtensionFactory.class.getName());
+                throw new RuntimeException(message);
+            }
         }
         extension.addTo(this);
     }
