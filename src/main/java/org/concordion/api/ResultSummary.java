@@ -18,6 +18,8 @@ public interface ResultSummary {
 
     long getExceptionCount();
 
+    long getIgnoredCount();
+
     @Deprecated
     /* Use print(out, fixture) instead. */
     void print(PrintStream out);

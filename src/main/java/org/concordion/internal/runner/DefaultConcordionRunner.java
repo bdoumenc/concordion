@@ -29,6 +29,9 @@ public class DefaultConcordionRunner implements Runner {
              || isOnlySuccessfulBecauseItIsUnimplemented(concordionClass)) {
                 result = Result.IGNORED;
             }
+            if (jUnitResult.getIgnoreCount() > 0) {
+                result = Result.IGNORED;
+            }
         }
         return new RunnerResult(result);            
     }

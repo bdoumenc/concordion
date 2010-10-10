@@ -4,10 +4,12 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.concordion.api.ResultSummary;
 import org.concordion.internal.FixtureRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.Description;
+import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -17,6 +19,7 @@ public class ConcordionRunner extends BlockJUnit4ClassRunner {
 
     private final Description fixtureDescription;
     private final FrameworkMethod fakeMethod;
+    private ResultSummary result;
 
     /*
      * The standard JUnit runner (BlockJUnit4ClassRunner) requires at least 
@@ -96,10 +99,18 @@ public class ConcordionRunner extends BlockJUnit4ClassRunner {
         return super.describeChild(method);
     }
 
+    @Override
+    protected void runChild(FrameworkMethod method, RunNotifier notifier) {
+        super.runChild(method, notifier);
+        if (result.getIgnoredCount() > 0) {
+            notifier.fireTestIgnored(fixtureDescription);
+        }
+    }
+
     protected Statement specExecStatement(final Object fixture) {
         return new Statement() {
             public void evaluate() throws Throwable {
-                new FixtureRunner().run(fixture);
+                result = new FixtureRunner().run(fixture);
             }
         };
     }

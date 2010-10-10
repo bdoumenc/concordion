@@ -64,6 +64,10 @@ public class SummarizingResultRecorder implements ResultRecorder, ResultSummary 
         return getCount(Result.SUCCESS);
     }
 
+    public long getIgnoredCount() {
+        return getCount(Result.IGNORED);
+    }
+
     public void print(PrintStream out) {
         print(out, this);
     }
@@ -71,6 +75,9 @@ public class SummarizingResultRecorder implements ResultRecorder, ResultSummary 
     public void print(PrintStream out, Object fixture) {
         out.print("Successes: " + getSuccessCount());
         out.print(", Failures: " + getFailureCount());
+        if (getIgnoredCount() > 0) {
+            out.print(", Ignored: " + getIgnoredCount());
+        }
         if (hasExceptions()) {
             out.print(", Exceptions: " + getExceptionCount());
         }

@@ -7,7 +7,7 @@ import org.concordion.api.ResultSummary;
 
 public class FixtureRunner {
     
-    public void run(final Object fixture) throws IOException {
+    public ResultSummary run(final Object fixture) throws IOException {
         ConcordionBuilder concordionBuilder = new ConcordionBuilder();
         if (fixture.getClass().isAnnotationPresent(FullOGNL.class)) {
             concordionBuilder.withEvaluatorFactory(new OgnlEvaluatorFactory());
@@ -15,5 +15,6 @@ public class FixtureRunner {
         ResultSummary resultSummary = concordionBuilder.build().process(fixture);
         resultSummary.print(System.out, fixture);
         resultSummary.assertIsSatisfied(fixture);
+        return resultSummary;
     }
 }
