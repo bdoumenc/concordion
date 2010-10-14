@@ -7,7 +7,7 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Node;
 
-import org.concordion.internal.DocumentParsingListener;
+import org.concordion.api.command.DocumentParsingListener;
 import org.concordion.internal.util.Check;
 
 public class DocumentStructureImprover implements DocumentParsingListener {

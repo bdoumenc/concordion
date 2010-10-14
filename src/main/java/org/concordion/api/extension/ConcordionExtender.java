@@ -7,12 +7,12 @@ import org.concordion.api.Target;
 import org.concordion.api.command.AssertEqualsListener;
 import org.concordion.api.command.AssertFalseListener;
 import org.concordion.api.command.AssertTrueListener;
+import org.concordion.api.command.DocumentParsingListener;
 import org.concordion.api.command.ExecuteListener;
 import org.concordion.api.command.RunListener;
 import org.concordion.api.command.SpecificationProcessingListener;
 import org.concordion.api.command.ThrowableCaughtListener;
 import org.concordion.api.command.VerifyRowsListener;
-import org.concordion.internal.DocumentParsingListener;
 
 /**
  * Allows {@link ConcordionExtension}s to add features to Concordion.

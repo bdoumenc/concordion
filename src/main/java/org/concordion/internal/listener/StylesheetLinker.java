@@ -5,9 +5,9 @@ import nu.xom.Document;
 import nu.xom.Element;
 
 import org.concordion.api.Resource;
+import org.concordion.api.command.DocumentParsingListener;
 import org.concordion.api.command.SpecificationProcessingEvent;
 import org.concordion.api.command.SpecificationProcessingListener;
-import org.concordion.internal.DocumentParsingListener;
 import org.concordion.internal.util.Check;
 
 public class StylesheetLinker implements DocumentParsingListener, SpecificationProcessingListener {
