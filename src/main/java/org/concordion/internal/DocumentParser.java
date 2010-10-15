@@ -10,7 +10,7 @@ import org.concordion.api.CommandFactory;
 import org.concordion.api.Element;
 import org.concordion.api.Resource;
 import org.concordion.api.Specification;
-import org.concordion.api.command.DocumentParsingListener;
+import org.concordion.api.listener.DocumentParsingListener;
 import org.concordion.internal.util.Announcer;
 import org.concordion.internal.util.Check;
 

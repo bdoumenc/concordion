@@ -3,12 +3,12 @@ package test.concordion.extension;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.concordion.api.ConcordionBuildEvent;
-import org.concordion.api.ConcordionBuildListener;
 import org.concordion.api.Resource;
 import org.concordion.api.Target;
 import org.concordion.api.extension.ConcordionExtender;
 import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.api.listener.ConcordionBuildEvent;
+import org.concordion.api.listener.ConcordionBuildListener;
 
 public class DynamicResourceExtension implements ConcordionExtension, ConcordionBuildListener {
 

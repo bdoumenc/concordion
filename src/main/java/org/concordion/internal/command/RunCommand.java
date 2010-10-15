@@ -2,18 +2,18 @@ package org.concordion.internal.command;
 
 import java.lang.reflect.Method;
 
+import org.concordion.api.AbstractCommand;
 import org.concordion.api.CommandCall;
 import org.concordion.api.Element;
 import org.concordion.api.Evaluator;
 import org.concordion.api.Result;
 import org.concordion.api.ResultRecorder;
 import org.concordion.api.Runner;
-import org.concordion.api.command.AbstractCommand;
-import org.concordion.api.command.RunFailureEvent;
-import org.concordion.api.command.RunIgnoreEvent;
-import org.concordion.api.command.RunListener;
-import org.concordion.api.command.RunSuccessEvent;
-import org.concordion.api.command.ThrowableCaughtEvent;
+import org.concordion.api.listener.RunFailureEvent;
+import org.concordion.api.listener.RunIgnoreEvent;
+import org.concordion.api.listener.RunListener;
+import org.concordion.api.listener.RunSuccessEvent;
+import org.concordion.api.listener.ThrowableCaughtEvent;
 import org.concordion.internal.runner.DefaultConcordionRunner;
 import org.concordion.internal.util.Announcer;
 import org.concordion.internal.util.Check;

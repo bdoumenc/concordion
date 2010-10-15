@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 import org.concordion.api.Element;
 import org.concordion.api.Resource;
 import org.concordion.api.Target;
-import org.concordion.api.command.SpecificationProcessingEvent;
-import org.concordion.api.command.SpecificationProcessingListener;
+import org.concordion.api.listener.SpecificationProcessingEvent;
+import org.concordion.api.listener.SpecificationProcessingListener;
 import org.concordion.internal.util.IOUtil;
 
 public class PageFooterRenderer implements SpecificationProcessingListener {

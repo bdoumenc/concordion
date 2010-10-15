@@ -1,4 +1,6 @@
-package org.concordion.api;
+package org.concordion.api.listener;
+
+import org.concordion.api.Target;
 
 public class ConcordionBuildEvent {
     private final Target target;

@@ -1,15 +1,17 @@
-package org.concordion.api.command;
+package org.concordion.api.listener;
 
 import org.concordion.api.Element;
 
-public class ExecuteEvent {
+public class RunSuccessEvent {
+
     private final Element element;
 
-    public ExecuteEvent(Element element) {
+    public RunSuccessEvent(Element element) {
         this.element = element;
     }
-
+    
     public Element getElement() {
         return element;
     }
+
 }

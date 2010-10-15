@@ -3,8 +3,8 @@ package org.concordion.internal.listener;
 import java.io.IOException;
 
 import org.concordion.api.Target;
-import org.concordion.api.command.SpecificationProcessingEvent;
-import org.concordion.api.command.SpecificationProcessingListener;
+import org.concordion.api.listener.SpecificationProcessingEvent;
+import org.concordion.api.listener.SpecificationProcessingListener;
 import org.concordion.internal.FileTarget;
 
 public class SpecificationExporter implements SpecificationProcessingListener {

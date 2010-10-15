@@ -4,7 +4,7 @@ import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
 
-import org.concordion.api.command.DocumentParsingListener;
+import org.concordion.api.listener.DocumentParsingListener;
 import org.concordion.internal.util.Check;
 
 public class JavaScriptEmbedder implements DocumentParsingListener {

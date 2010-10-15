@@ -3,7 +3,7 @@ package org.concordion.internal.listener;
 import nu.xom.Document;
 import nu.xom.Element;
 
-import org.concordion.api.command.DocumentParsingListener;
+import org.concordion.api.listener.DocumentParsingListener;
 import org.concordion.internal.util.Check;
 
 public class StylesheetEmbedder implements DocumentParsingListener {

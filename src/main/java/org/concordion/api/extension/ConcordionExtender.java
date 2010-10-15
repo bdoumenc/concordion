@@ -1,18 +1,18 @@
 package org.concordion.api.extension;
 
 import org.concordion.api.Command;
-import org.concordion.api.ConcordionBuildListener;
 import org.concordion.api.Resource;
 import org.concordion.api.Target;
-import org.concordion.api.command.AssertEqualsListener;
-import org.concordion.api.command.AssertFalseListener;
-import org.concordion.api.command.AssertTrueListener;
-import org.concordion.api.command.DocumentParsingListener;
-import org.concordion.api.command.ExecuteListener;
-import org.concordion.api.command.RunListener;
-import org.concordion.api.command.SpecificationProcessingListener;
-import org.concordion.api.command.ThrowableCaughtListener;
-import org.concordion.api.command.VerifyRowsListener;
+import org.concordion.api.listener.AssertEqualsListener;
+import org.concordion.api.listener.AssertFalseListener;
+import org.concordion.api.listener.AssertTrueListener;
+import org.concordion.api.listener.ConcordionBuildListener;
+import org.concordion.api.listener.DocumentParsingListener;
+import org.concordion.api.listener.ExecuteListener;
+import org.concordion.api.listener.RunListener;
+import org.concordion.api.listener.SpecificationProcessingListener;
+import org.concordion.api.listener.ThrowableCaughtListener;
+import org.concordion.api.listener.VerifyRowsListener;
 
 /**
  * Allows {@link ConcordionExtension}s to add features to Concordion.

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.concordion.api.Element;
-import org.concordion.api.command.ThrowableCaughtEvent;
+import org.concordion.api.listener.ThrowableCaughtEvent;
 import org.concordion.integration.junit3.ConcordionTestCase;
 import org.concordion.internal.listener.ThrowableRenderer;
 

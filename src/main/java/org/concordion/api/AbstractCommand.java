@@ -1,9 +1,5 @@
-package org.concordion.api.command;
+package org.concordion.api;
 
-import org.concordion.api.Command;
-import org.concordion.api.CommandCall;
-import org.concordion.api.Evaluator;
-import org.concordion.api.ResultRecorder;
 
 public abstract class AbstractCommand implements Command {
 

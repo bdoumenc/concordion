@@ -1,8 +1,8 @@
 package test.concordion.extension;
 
 import org.concordion.api.Element;
-import org.concordion.api.command.ExecuteEvent;
-import org.concordion.api.command.ExecuteListener;
+import org.concordion.api.listener.ExecuteEvent;
+import org.concordion.api.listener.ExecuteListener;
 
 public class ExecuteLogger implements ExecuteListener {
     public void executeCompleted(ExecuteEvent e) {

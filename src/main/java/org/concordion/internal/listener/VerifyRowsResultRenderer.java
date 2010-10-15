@@ -1,10 +1,10 @@
 package org.concordion.internal.listener;
 
 import org.concordion.api.Element;
-import org.concordion.api.command.ExpressionEvaluatedEvent;
-import org.concordion.api.command.MissingRowEvent;
-import org.concordion.api.command.SurplusRowEvent;
-import org.concordion.api.command.VerifyRowsListener;
+import org.concordion.api.listener.ExpressionEvaluatedEvent;
+import org.concordion.api.listener.MissingRowEvent;
+import org.concordion.api.listener.SurplusRowEvent;
+import org.concordion.api.listener.VerifyRowsListener;
 
 public class VerifyRowsResultRenderer implements VerifyRowsListener {
 

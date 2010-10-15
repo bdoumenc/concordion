@@ -1,9 +1,9 @@
 package test.concordion.extension;
 
-import org.concordion.api.command.ExecuteListener;
-import org.concordion.api.command.VerifyRowsListener;
 import org.concordion.api.extension.ConcordionExtender;
 import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.api.listener.ExecuteListener;
+import org.concordion.api.listener.VerifyRowsListener;
 
 public class LoggingExtension implements ConcordionExtension {
 

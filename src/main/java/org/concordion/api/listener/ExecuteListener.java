@@ -1,4 +1,4 @@
-package org.concordion.api.command;
+package org.concordion.api.listener;
 
 import java.util.EventListener;
 

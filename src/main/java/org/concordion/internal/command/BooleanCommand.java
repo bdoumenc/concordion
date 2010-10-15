@@ -1,14 +1,14 @@
 package org.concordion.internal.command;
 
+import org.concordion.api.AbstractCommand;
 import org.concordion.api.CommandCall;
 import org.concordion.api.CommandCallList;
 import org.concordion.api.Element;
 import org.concordion.api.Evaluator;
 import org.concordion.api.ResultRecorder;
-import org.concordion.api.command.AbstractCommand;
-import org.concordion.api.command.AssertFailureEvent;
-import org.concordion.api.command.AssertListener;
-import org.concordion.api.command.AssertSuccessEvent;
+import org.concordion.api.listener.AssertFailureEvent;
+import org.concordion.api.listener.AssertListener;
+import org.concordion.api.listener.AssertSuccessEvent;
 import org.concordion.internal.InvalidExpressionException;
 import org.concordion.internal.util.Announcer;
 
