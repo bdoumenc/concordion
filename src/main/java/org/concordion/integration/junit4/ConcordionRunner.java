@@ -102,7 +102,7 @@ public class ConcordionRunner extends BlockJUnit4ClassRunner {
     @Override
     protected void runChild(FrameworkMethod method, RunNotifier notifier) {
         super.runChild(method, notifier);
-        if (result.getIgnoredCount() > 0) {
+        if (result != null && result.getIgnoredCount() > 0) {
             notifier.fireTestIgnored(fixtureDescription);
         }
     }
