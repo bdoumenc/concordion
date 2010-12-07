@@ -25,6 +25,11 @@ public class JavaScriptLinker implements DocumentParsingListener, SpecificationP
         Check.notNull(head, "<head> section is missing from document");
         script = new nu.xom.Element("script");
         script.addAttribute(new Attribute("type", "text/javascript"));
+        
+        // Fix for Issue #26: Strict XHTML DTD requires an explicit end tag for <script> element
+        // Thanks to Matthias Schwegler for reporting and supplying a fix for this.
+        script.appendChild("");
+        
         head.appendChild(script);
     }
 
