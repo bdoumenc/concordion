@@ -31,4 +31,8 @@ public class StubSource implements Source {
     public boolean canFind(Resource resource) {
         return resources.containsKey(resource);
     }
+
+    public String getName(Resource resource) {
+        return "[stub: " + resource.getPath() + "]";
+    }
 }

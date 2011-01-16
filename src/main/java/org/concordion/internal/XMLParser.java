@@ -11,14 +11,18 @@ import nu.xom.ValidityException;
 public class XMLParser {
 
     public Document parse(InputStream inputStream) throws IOException, ParsingException {
+        return parse(inputStream, null);
+    }
+    
+    public Document parse(InputStream inputStream, String sourceReference) throws IOException, ParsingException {
         Document document;
         Builder builder = new Builder();
         try {
             document = builder.build(inputStream);
         } catch (ValidityException e) {
-            throw new ParsingException("Failed to validate XML document", e);
+            throw new ParsingException("Failed to validate XML document", e, sourceReference);
         } catch (nu.xom.ParsingException e) {
-            throw new ParsingException("Failed to parse XML document", e);
+            throw new ParsingException("Failed to parse XML document", e, sourceReference);
         }
         return document;
     }

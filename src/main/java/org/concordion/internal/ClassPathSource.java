@@ -29,4 +29,8 @@ public class ClassPathSource implements Source {
         }
         return true;
     }
+    
+    public String getName(Resource resource) {
+        return "[classpath: " + resource.getPath() + "]";
+    }
 }
