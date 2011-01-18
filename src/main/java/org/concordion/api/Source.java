@@ -8,6 +8,4 @@ public interface Source {
     InputStream createInputStream(Resource resource) throws IOException;
     
     boolean canFind(Resource resource);
-
-    String getName(Resource resource);
 }

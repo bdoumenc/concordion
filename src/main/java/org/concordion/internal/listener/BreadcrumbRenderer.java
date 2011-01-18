@@ -83,7 +83,7 @@ public class BreadcrumbRenderer implements SpecificationProcessingListener {
 
     private Element createBreadcrumbElement(Resource documentResource, Resource indexPageResource) throws IOException  {
 
-        Document document = xmlParser.parse(source.createInputStream(indexPageResource), source.getName(indexPageResource));
+        Document document = xmlParser.parse(source.createInputStream(indexPageResource));
 
         String breadcrumbWording = getBreadcrumbWording(new Element(document.getRootElement()), indexPageResource);
         Element a = new Element("a");

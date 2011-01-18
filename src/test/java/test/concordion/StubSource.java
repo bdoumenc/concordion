@@ -12,11 +12,13 @@ import org.concordion.internal.util.Check;
 
 public class StubSource implements Source {
 
-    // FUTURE: Could change this to byte[] instead of String - to handle binary resources.
+    private static final String STUB_RESOURCE_ORIGIN = "stub";
+    
+	// FUTURE: Could change this to byte[] instead of String - to handle binary resources.
     private Map<Resource, String> resources = new HashMap<Resource, String>();
 
     public void addResource(String resourceName, String content) {
-        addResource(new Resource(resourceName), content);
+        addResource(stubbedResource(resourceName), content);
     }
 
     public void addResource(Resource resource, String content) {
@@ -24,15 +26,15 @@ public class StubSource implements Source {
     }
 
     public InputStream createInputStream(Resource resource) throws IOException {
-        Check.isTrue(canFind(resource), "No such resource exists in simulator: " + resource.getPath());
+        Check.isTrue(canFind(resource), "Resource '" + resource.getPath() + "' has not been stubbed in the simulator.");
         return new ByteArrayInputStream(resources.get(resource).getBytes("UTF-8"));
     }
 
     public boolean canFind(Resource resource) {
         return resources.containsKey(resource);
     }
-
-    public String getName(Resource resource) {
-        return "[stub: " + resource.getPath() + "]";
+    
+    private static Resource stubbedResource(String resourceName) {
+    	return new Resource(STUB_RESOURCE_ORIGIN, resourceName);
     }
 }

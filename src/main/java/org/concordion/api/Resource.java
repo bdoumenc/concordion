@@ -4,13 +4,21 @@ import org.concordion.internal.util.Check;
 
 public final class Resource {
 
-    private final String path;
+    private static final String CLASSPATH_ORIGIN = "classpath";
+    
+	private final String path;
     private final String[] parts;
     private final String name;
     private final boolean isPackage;
+	private final String origin;
 
     public Resource(String path) {
-        path = path.replaceAll("\\\\", "/");
+    	this(CLASSPATH_ORIGIN, path);
+    }
+    
+    public Resource(String origin, String path) {
+        this.origin = origin;
+		path = path.replaceAll("\\\\", "/");
         Check.isTrue(path.startsWith("/"), "Internal error: Resource path should start with a slash");
         this.path = path;
         isPackage = endsWithSlash(path);
@@ -131,7 +139,7 @@ public final class Resource {
 
     @Override
     public String toString() {
-        return "[Resource: " + path + "]";
+        return getDescription();
     }
 
     @Override
@@ -163,4 +171,8 @@ public final class Resource {
         }
         return true;
     }
+
+	public String getDescription() {
+		return "[" + origin + ": " + path + "]";
+	}
 }

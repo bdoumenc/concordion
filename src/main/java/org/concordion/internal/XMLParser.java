@@ -14,15 +14,15 @@ public class XMLParser {
         return parse(inputStream, null);
     }
     
-    public Document parse(InputStream inputStream, String sourceReference) throws IOException, ParsingException {
+    public Document parse(InputStream inputStream, String sourceDescription) throws IOException, ParsingException {
         Document document;
         Builder builder = new Builder();
         try {
             document = builder.build(inputStream);
         } catch (ValidityException e) {
-            throw new ParsingException("Failed to validate XML document", e, sourceReference);
+            throw new ParsingException("Failed to validate XML document", e, sourceDescription);
         } catch (nu.xom.ParsingException e) {
-            throw new ParsingException("Failed to parse XML document", e, sourceReference);
+            throw new ParsingException("Failed to parse XML document", e, sourceDescription);
         }
         return document;
     }
