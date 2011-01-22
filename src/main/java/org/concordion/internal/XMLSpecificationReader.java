@@ -22,7 +22,7 @@ public class XMLSpecificationReader implements SpecificationReader {
     }
     
     public Specification readSpecification(Resource resource) throws IOException {
-        Document document = xmlParser.parse(source.createInputStream(resource), resource.getDescription());
+        Document document = xmlParser.parse(source.createInputStream(resource), String.format("[%s: %s]", source, resource.getPath()));
         return documentParser.parse(document, resource);
     }
 }

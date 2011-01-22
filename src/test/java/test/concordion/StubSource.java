@@ -12,13 +12,11 @@ import org.concordion.internal.util.Check;
 
 public class StubSource implements Source {
 
-    private static final String STUB_RESOURCE_ORIGIN = "stub";
-    
-	// FUTURE: Could change this to byte[] instead of String - to handle binary resources.
+    // FUTURE: Could change this to byte[] instead of String - to handle binary resources.
     private Map<Resource, String> resources = new HashMap<Resource, String>();
 
     public void addResource(String resourceName, String content) {
-        addResource(stubbedResource(resourceName), content);
+        addResource(new Resource(resourceName), content);
     }
 
     public void addResource(Resource resource, String content) {
@@ -34,7 +32,8 @@ public class StubSource implements Source {
         return resources.containsKey(resource);
     }
     
-    private static Resource stubbedResource(String resourceName) {
-    	return new Resource(STUB_RESOURCE_ORIGIN, resourceName);
+    @Override
+    public String toString() {
+        return "stub";
     }
 }

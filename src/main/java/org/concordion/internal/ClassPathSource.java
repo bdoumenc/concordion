@@ -12,7 +12,7 @@ public class ClassPathSource implements Source {
     public InputStream createInputStream(Resource resource) throws IOException {
         InputStream inputStream = IOUtil.getResourceAsStream(resource.getPath());
         if (inputStream == null) {
-            throw new IOException("Resource '" + resource.getDescription() + "' not found");
+            throw new IOException(String.format("Resource '[%s: %s]' not found", this, resource.getPath()));
         }
         return inputStream;
     }
@@ -28,5 +28,10 @@ public class ClassPathSource implements Source {
             // Ignore
         }
         return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "classpath";
     }
 }
