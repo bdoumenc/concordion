@@ -77,7 +77,7 @@ public class ThrowableRenderer implements ThrowableCaughtListener {
     }
     
     private Element stackTrace(Throwable t, String expression) {
-        Element stackTrace = new Element("span").addStyleClass("stackTrace");
+        Element stackTrace = new Element("div").addStyleClass("stackTrace");
         stackTrace.setId("stackTrace" + buttonId);
         
         Element p = new Element("p")
@@ -91,7 +91,7 @@ public class ThrowableRenderer implements ThrowableCaughtListener {
     }
 
     private void recursivelyAppendStackTrace(Throwable t, Element stackTrace) {
-        Element stackTraceExceptionMessage = new Element("span")
+        Element stackTraceExceptionMessage = new Element("div")
                 .addStyleClass("stackTraceExceptionMessage")
                 .appendText(t.getClass().getName() + ": " + t.getMessage());
         stackTrace.appendChild(stackTraceExceptionMessage);
@@ -113,7 +113,7 @@ public class ThrowableRenderer implements ThrowableCaughtListener {
     }
 
     private Element stackTraceElement(StackTraceElement traceElement) {
-        Element entry = new Element("span")
+        Element entry = new Element("div")
                 .addStyleClass("stackTraceEntry")
                 .appendText("at " + traceElement.getClassName())
                 .appendText("." + traceElement.getMethodName());
