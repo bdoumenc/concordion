@@ -11,7 +11,7 @@ public class ClassNameBasedSpecificationLocator implements SpecificationLocator 
         
         String dottedClassName = fixture.getClass().getName();
         String slashedClassName = dottedClassName.replaceAll("\\.", "/");
-        String specificationName = slashedClassName.replaceAll("Test$", "");
+        String specificationName = slashedClassName.replaceAll("(Fixture|Test)$", "");
         String resourcePath = "/" + specificationName + ".html";
         
         return new Resource(resourcePath);
