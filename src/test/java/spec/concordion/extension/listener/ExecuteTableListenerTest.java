@@ -1,13 +1,14 @@
 package spec.concordion.extension.listener;
 
 import spec.concordion.extension.AbstractExtensionTestCase;
+import test.concordion.extension.LoggingExtension;
 
 public class ExecuteTableListenerTest extends AbstractExtensionTestCase {
 
     public void addLoggingExtension() {
-        setExtensions("test.concordion.extension.LoggingExtension");
+        setExtension(new LoggingExtension().withStream(getLogStream()));
     }
-    
+
     public double sqrt(double num) {
         return Math.sqrt(num);
     }

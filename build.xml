@@ -10,6 +10,14 @@
     <property name="dir.concordion.output" value="${dir.test.output}/concordion"/>
     <property name="dir.dist" value="${basedir}/dist"/>
     <property name="dir.mvn.target" value="${basedir}/target"/>
+    <property environment="env"/>
+    <property name="java5.bootclasspath" value="${env.JAVA5_BOOTCLASSPATH}"/>
+
+    <fail unless="env.JAVA5_BOOTCLASSPATH">ERROR:
+The environment variable JAVA5_BOOTCLASSPATH must be set to a Java 5 rt.jar.  
+While the test classes require Java 6 or later, this variable must be set to 
+ensure compatibility with Java 5 libraries for the main classes.</fail>
+
 
     <path id="compile.classpath">
         <fileset dir="lib" includes="*.jar" excludes="*-src.jar"/>
@@ -29,7 +37,42 @@
         <delete dir="${dir.mvn.target}"/>
     </target>
 
-    <target name="compile">
+    <target name="compile.main">
+        <mkdir dir="${dir.classes}"/>
+
+        <javac classpathref="compile.classpath"
+               destdir="${dir.classes}"
+               srcdir="src/main/java"
+               debug="yes"
+               failonerror="yes"
+               source="1.5"
+               target="1.5"
+               includeantruntime="no"
+               bootclasspath="${java5.bootclasspath}"
+        />
+
+        <copy todir="${dir.classes}">
+            <fileset dir="src/main/resources" />
+        </copy>
+    </target>
+
+    <target name="compile.test">
+        <mkdir dir="${dir.classes}"/>
+
+        <javac classpathref="compile.classpath"
+               destdir="${dir.classes}"
+               srcdir="src/test/java"
+               debug="yes"
+               failonerror="yes"
+               includeantruntime="no"
+        />
+
+        <copy todir="${dir.classes}">
+            <fileset dir="src/test/resources" />
+        </copy>
+    </target>
+
+    <target name="compile" depends="compile.main, compile.test">
         <mkdir dir="${dir.classes}"/>
 
         <javac classpathref="compile.classpath"
@@ -39,7 +82,8 @@
                failonerror="yes"
                source="1.5"
                target="1.5"
-        	   includeantruntime="no"
+               includeantruntime="no"
+               bootclasspath="${java5.bootclasspath}"
         />
 
         <copy todir="${dir.classes}">

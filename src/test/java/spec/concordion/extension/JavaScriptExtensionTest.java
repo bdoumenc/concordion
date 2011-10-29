@@ -3,6 +3,8 @@ package spec.concordion.extension;
 import org.concordion.api.Resource;
 
 import test.concordion.TestRig;
+import test.concordion.extension.JavaScriptEmbeddedExtension;
+import test.concordion.extension.JavaScriptLinkedExtension;
 
 public class JavaScriptExtensionTest extends AbstractExtensionTestCase {
 
@@ -10,11 +12,11 @@ public class JavaScriptExtensionTest extends AbstractExtensionTestCase {
     public static final String TEST_JS = "/* My test JS */";
 
     public void addLinkedJavaScriptExtension() {
-        setExtensions("test.concordion.extension.JavaScriptLinkedExtension");
+        setExtension(new JavaScriptLinkedExtension());
     }
 
     public void addEmbeddedJavaScriptExtension() {
-        setExtensions("test.concordion.extension.JavaScriptEmbeddedExtension");
+        setExtension(new JavaScriptEmbeddedExtension());
     }
 
     @Override

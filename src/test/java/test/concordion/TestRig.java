@@ -6,8 +6,10 @@ import org.concordion.Concordion;
 import org.concordion.api.EvaluatorFactory;
 import org.concordion.api.Resource;
 import org.concordion.api.ResultSummary;
+import org.concordion.api.extension.ConcordionExtension;
 import org.concordion.internal.ConcordionBuilder;
 import org.concordion.internal.SimpleEvaluatorFactory;
+import org.concordion.internal.extension.FixtureExtensionLoader;
 
 
 public class TestRig {
@@ -16,6 +18,8 @@ public class TestRig {
     private EvaluatorFactory evaluatorFactory = new SimpleEvaluatorFactory();
     private StubSource stubSource = new StubSource();
     private StubTarget stubTarget;
+    private FixtureExtensionLoader fixtureExtensionLoader = new FixtureExtensionLoader();
+    private ConcordionExtension extension; 
 
     public TestRig withFixture(Object fixture) {
         this.fixture = fixture;
@@ -29,14 +33,20 @@ public class TestRig {
     public ProcessingResult process(Resource resource) {
         EventRecorder eventRecorder = new EventRecorder();
         stubTarget = new StubTarget();
-        Concordion concordion = new ConcordionBuilder()
+        ConcordionBuilder concordionBuilder = new ConcordionBuilder()
             .withAssertEqualsListener(eventRecorder)
             .withThrowableListener(eventRecorder)
             .withSource(stubSource)
             .withEvaluatorFactory(evaluatorFactory)
-            .withTarget(stubTarget)
-            .build();
-        
+            .withTarget(stubTarget);
+        if (fixture != null) {
+            fixtureExtensionLoader.addExtensions(fixture, concordionBuilder);
+        }
+        if (extension != null) {
+            extension.addTo(concordionBuilder);
+        }
+        Concordion concordion = concordionBuilder.build();
+
         try {
             ResultSummary resultSummary = concordion.process(resource, fixture);
             String xml = stubTarget.getWrittenString(resource);
@@ -76,5 +86,10 @@ public class TestRig {
     
     public boolean hasCopiedResource(Resource resource) {
         return stubTarget.hasCopiedResource(resource);
+    }
+
+    public TestRig withExtension(ConcordionExtension extension) {
+        this.extension = extension;
+        return this;
     }
 }

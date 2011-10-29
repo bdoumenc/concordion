@@ -3,16 +3,17 @@ package spec.concordion.extension;
 import org.concordion.api.Resource;
 
 import test.concordion.TestRig;
+import test.concordion.extension.DynamicResourceExtension;
 import test.concordion.extension.ResourceExtension;
 
 public class ResourceExtensionTest extends AbstractExtensionTestCase {
 
     public void addResourceExtension() {
-        setExtensions("test.concordion.extension.ResourceExtension");
+        setExtension(new ResourceExtension());
     }
 
     public void addDynamicResourceExtension() {
-        setExtensions("test.concordion.extension.DynamicResourceExtension");
+        setExtension(new DynamicResourceExtension());
     }
 
     @Override

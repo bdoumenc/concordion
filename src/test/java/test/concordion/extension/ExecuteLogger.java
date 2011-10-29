@@ -1,10 +1,19 @@
 package test.concordion.extension;
 
+import java.io.PrintStream;
+
 import org.concordion.api.Element;
 import org.concordion.api.listener.ExecuteEvent;
 import org.concordion.api.listener.ExecuteListener;
 
 public class ExecuteLogger implements ExecuteListener {
+    
+    private PrintStream stream;
+
+    public void setStream(PrintStream stream) {
+        this.stream = stream;
+    }
+    
     public void executeCompleted(ExecuteEvent e) {
         Element element = e.getElement();
         if (element.getLocalName().equals("tr")) {
@@ -21,9 +30,9 @@ public class ExecuteLogger implements ExecuteListener {
                 sb.append(child.getText());
             }
             sb.append("'");
-            System.out.println(sb.toString());
+            stream.println(sb.toString());
         } else {
-            System.out.println("Execute '" + element.getText() + "'");
+            stream.println("Execute '" + element.getText() + "'");
         }
     }
 }

@@ -1,5 +1,7 @@
 package test.concordion.extension;
 
+import java.io.PrintStream;
+
 import org.concordion.api.listener.ExpressionEvaluatedEvent;
 import org.concordion.api.listener.MissingRowEvent;
 import org.concordion.api.listener.SurplusRowEvent;
@@ -8,15 +10,21 @@ import org.concordion.internal.ConcordionBuilder;
 
 public class VerifyRowsLogger implements VerifyRowsListener {
     
+    private PrintStream stream;
+
+    public void setStream(PrintStream stream) {
+        this.stream = stream;
+    }
+    
     public void expressionEvaluated(ExpressionEvaluatedEvent e) {
-        System.out.println("Evaluated '" + e.getElement().getAttributeValue("verifyRows", ConcordionBuilder.NAMESPACE_CONCORDION_2007) + "'");
+        stream.println("Evaluated '" + e.getElement().getAttributeValue("verifyRows", ConcordionBuilder.NAMESPACE_CONCORDION_2007) + "'");
     }
     
     public void missingRow(MissingRowEvent e) {
-        System.out.println("Missing Row '" + e.getRowElement().getText() + "'");
+        stream.println("Missing Row '" + e.getRowElement().getText() + "'");
     }
 
     public void surplusRow(SurplusRowEvent e) {
-        System.out.println("Surplus Row '" + e.getRowElement().getText() + "'");
+        stream.println("Surplus Row '" + e.getRowElement().getText() + "'");
     }
 }

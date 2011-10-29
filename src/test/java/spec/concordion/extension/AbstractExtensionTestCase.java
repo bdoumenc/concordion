@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.concordion.api.Resource;
+import org.concordion.api.extension.ConcordionExtension;
 import org.concordion.integration.junit3.ConcordionTestCase;
 
 import test.concordion.ProcessingResult;
@@ -17,9 +18,13 @@ public abstract class AbstractExtensionTestCase extends ConcordionTestCase {
     private List<String> eventList;
     private TestRig testRig;
     private ProcessingResult processingResult;
+    private PrintStream logStream;
+    private ByteArrayOutputStream baos;
+    private ConcordionExtension extension;
 
     public AbstractExtensionTestCase() {
-        super();
+        baos = new ByteArrayOutputStream(4096);
+        logStream = new PrintStream(baos);
     }
 
     public void processAnything() throws Exception { 
@@ -27,31 +32,25 @@ public abstract class AbstractExtensionTestCase extends ConcordionTestCase {
     }
     
     public void process(String fragment) throws Exception {
-        
-        PrintStream savedStream = System.out;
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
-            PrintStream logStream = new PrintStream(baos);
-            System.setOut(logStream);
-            
-            testRig = new TestRig();
-            configureTestRig(testRig);
-            processingResult = testRig.withFixture(this)
-              .processFragment(fragment);
-            
-            System.out.flush();
-            String[] events = baos.toString().split("\\r?\\n");
-            eventList = new ArrayList<String>(Arrays.asList(events));
-            eventList.remove("");
-        } finally {
-            System.setOut(savedStream);
-        }
+        testRig = new TestRig();
+        configureTestRig(testRig);
+        processingResult = testRig.withFixture(this)
+          .withExtension(extension)
+          .processFragment(fragment);
     }
 
     protected void configureTestRig(TestRig testRig) {
     }
 
+    public PrintStream getLogStream() {
+        return logStream;
+    }
+
     public List<String> getEventLog() {
+        logStream.flush();
+        String[] events = baos.toString().split("\\r?\\n");
+        eventList = new ArrayList<String>(Arrays.asList(events));
+        eventList.remove("");
         return eventList;
     }
 
@@ -63,13 +62,7 @@ public abstract class AbstractExtensionTestCase extends ConcordionTestCase {
         return processingResult;
     }
     
-    protected void setExtensions(String extension) {
-        System.setProperty("concordion.extensions", extension);
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-        System.clearProperty("concordion.extensions");
+    protected void setExtension(ConcordionExtension extension) {
+        this.extension = extension;
     }
 }

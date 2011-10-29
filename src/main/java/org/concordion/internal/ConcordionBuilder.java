@@ -3,7 +3,9 @@ package org.concordion.internal;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.concordion.Concordion;
@@ -83,6 +85,7 @@ public class ConcordionBuilder implements ConcordionExtender {
     private File baseOutputDir;
     private ThrowableCaughtPublisher throwableListenerPublisher = new ThrowableCaughtPublisher();
     private LinkedHashMap<String, Resource> resourceToCopyMap = new LinkedHashMap<String, Resource>();
+    private List<SpecificationProcessingListener> specificationProcessingListeners = new ArrayList<SpecificationProcessingListener>();
     
     {
         withThrowableListener(new ThrowableRenderer());
@@ -164,7 +167,7 @@ public class ConcordionBuilder implements ConcordionExtender {
     }
 
     public ConcordionBuilder withSpecificationProcessingListener(SpecificationProcessingListener listener) {
-        specificationCommand.addSpecificationListener(listener);
+        specificationProcessingListeners.add(listener);
         return this;
     }
 
@@ -238,11 +241,19 @@ public class ConcordionBuilder implements ConcordionExtender {
         addExtensions();
         copyResources();
 
+        addSpecificationListeners();
+
         specificationCommand.addSpecificationListener(new SpecificationExporter(target));
         
         listeners.announce().concordionBuilt(new ConcordionBuildEvent(target));
         
         return new Concordion(specificationLocator, specificationReader, evaluatorFactory);
+    }
+
+    private void addSpecificationListeners() {
+        for (SpecificationProcessingListener listener : specificationProcessingListeners) {
+            specificationCommand.addSpecificationListener(listener);
+        }
     }
 
     private void copyResources() {

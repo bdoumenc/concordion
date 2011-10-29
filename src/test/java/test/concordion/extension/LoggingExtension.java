@@ -1,20 +1,28 @@
 package test.concordion.extension;
 
+import java.io.PrintStream;
+
 import org.concordion.api.extension.ConcordionExtender;
 import org.concordion.api.extension.ConcordionExtension;
-import org.concordion.api.listener.ExecuteListener;
-import org.concordion.api.listener.VerifyRowsListener;
 
 public class LoggingExtension implements ConcordionExtension {
 
+    private AssertLogger assertLogger = new AssertLogger();
+    private ExecuteLogger executeLogger = new ExecuteLogger();
+    private VerifyRowsLogger verifyRowsLogger = new VerifyRowsLogger();
+
     public void addTo(ConcordionExtender concordionExtender) {
-        AssertLogger assertLogger = new AssertLogger();
         concordionExtender.withAssertEqualsListener(assertLogger);
         concordionExtender.withAssertTrueListener(assertLogger);
         concordionExtender.withAssertFalseListener(assertLogger);
-        ExecuteListener executeListener = new ExecuteLogger();
-        concordionExtender.withExecuteListener(executeListener);
-        VerifyRowsListener verifyRowsListener = new VerifyRowsLogger();
-        concordionExtender.withVerifyRowsListener(verifyRowsListener);
+        concordionExtender.withExecuteListener(executeLogger);
+        concordionExtender.withVerifyRowsListener(verifyRowsLogger);
+    }
+    
+    public LoggingExtension withStream(PrintStream stream) {
+        assertLogger.setStream(stream);
+        executeLogger.setStream(stream);
+        verifyRowsLogger.setStream(stream);
+        return this;
     }
 }

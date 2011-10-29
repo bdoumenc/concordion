@@ -3,6 +3,8 @@ package spec.concordion.extension;
 import org.concordion.api.Resource;
 
 import test.concordion.TestRig;
+import test.concordion.extension.CSSEmbeddedExtension;
+import test.concordion.extension.CSSLinkedExtension;
 
 public class CSSExtensionTest extends AbstractExtensionTestCase {
 
@@ -10,11 +12,11 @@ public class CSSExtensionTest extends AbstractExtensionTestCase {
     public static final String TEST_CSS = "/* My test CSS */";
 
     public void addLinkedCSSExtension() {
-        setExtensions("test.concordion.extension.CSSLinkedExtension");
+        setExtension(new CSSLinkedExtension());
     }
 
     public void addEmbeddedCSSExtension() {
-        setExtensions("test.concordion.extension.CSSEmbeddedExtension");
+        setExtension(new CSSEmbeddedExtension());
     }
 
     @Override
