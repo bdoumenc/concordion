@@ -7,8 +7,8 @@
     <h1>Content Type</h1>
 
     <p>
-        If the document &lt;head&gt; section does not contain Content-Type metadata, then a UTF-8 
-        Content-Type &lt;meta&gt; element will be automatically inserted.
+        If the document &lt;head&gt; section does not contain content-type metadata, then a &lt;meta&gt; element will be automatically inserted,
+        specifying a content-type with charset set to UTF-8.
     </p>
 
     <div class="example">
@@ -30,7 +30,7 @@
 <pre concordion:assertEquals="#result">
 &lt;html xmlns:concordion="http://www.concordion.org/2007/concordion"&gt;
 &lt;head&gt; _
-&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" /&gt;
 &lt;title&gt;My Title&lt;/title&gt;
 &lt;/head&gt;
 &lt;body /&gt;

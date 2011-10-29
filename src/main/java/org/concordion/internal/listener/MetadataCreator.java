@@ -24,7 +24,7 @@ public class MetadataCreator implements DocumentParsingListener {
 
     private void addContentTypeMetadata(Element head) {
         Element meta = new Element("meta");
-        meta.addAttribute(new Attribute("http-equiv", "Content-Type"));
+        meta.addAttribute(new Attribute("http-equiv", "content-type"));
         meta.addAttribute(new Attribute("content", "text/html; charset=UTF-8"));
         head.insertChild(meta, 0);
     }
@@ -34,7 +34,7 @@ public class MetadataCreator implements DocumentParsingListener {
         for (int i=0; i < metaChildren.size(); i++) {
             Element metaChild = metaChildren.get(i);
             Attribute httpEquiv = metaChild.getAttribute("http-equiv");
-            if (httpEquiv != null && "Content-Type".equals(httpEquiv.getValue())) {
+            if (httpEquiv != null && "content-type".equalsIgnoreCase(httpEquiv.getValue())) {
                 return true;
             }
         }

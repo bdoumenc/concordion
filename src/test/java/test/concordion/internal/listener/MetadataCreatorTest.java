@@ -20,7 +20,7 @@ public class MetadataCreatorTest extends TestCase {
     
     public void testAddsContentTypeMetadataIfMissing() throws Exception {
         metadataCreator.beforeParsing(document);
-        assertEquals("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head></html>", html.toXML());
+        assertEquals("<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" /></head></html>", html.toXML());
     }
 
     public void testDoesNotAddContentTypeMetadataIfAlreadyPresent() throws Exception {
