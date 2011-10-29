@@ -2,6 +2,7 @@ package org.concordion.api.extension;
 
 import org.concordion.api.Command;
 import org.concordion.api.Resource;
+import org.concordion.api.Source;
 import org.concordion.api.Target;
 import org.concordion.api.listener.AssertEqualsListener;
 import org.concordion.api.listener.AssertFalseListener;
@@ -13,6 +14,7 @@ import org.concordion.api.listener.RunListener;
 import org.concordion.api.listener.SpecificationProcessingListener;
 import org.concordion.api.listener.ThrowableCaughtListener;
 import org.concordion.api.listener.VerifyRowsListener;
+import org.concordion.internal.ConcordionBuilder;
 
 /**
  * Allows {@link ConcordionExtension}s to add features to Concordion.
@@ -136,7 +138,21 @@ public interface ConcordionExtender {
      * Copies the given JavaScript file to the Concordion output folder, and adds a link to the JavaScript in the &lt;head&gt; section of the Concordion HTML.  
      * @param jsPath
      * @param targetResource
-     * @return
+     * @return this
      */
     ConcordionExtender withLinkedJavaScript(String jsPath, Resource targetResource);
+
+    /**
+     * Overrides the source that the Concordion specifications are read from.
+     * @param source the new source 
+     * @return this
+     */
+    ConcordionBuilder withSource(Source source);
+
+    /**
+     * Overrides the target that the Concordion specifications are written to.
+     * @param source the new target 
+     * @return this
+     */
+    ConcordionBuilder withTarget(Target target);
 }
