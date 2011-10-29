@@ -47,6 +47,7 @@ import org.concordion.internal.listener.BreadcrumbRenderer;
 import org.concordion.internal.listener.DocumentStructureImprover;
 import org.concordion.internal.listener.JavaScriptEmbedder;
 import org.concordion.internal.listener.JavaScriptLinker;
+import org.concordion.internal.listener.MetadataCreator;
 import org.concordion.internal.listener.PageFooterRenderer;
 import org.concordion.internal.listener.RunResultRenderer;
 import org.concordion.internal.listener.SpecificationExporter;
@@ -107,6 +108,7 @@ public class ConcordionBuilder implements ConcordionExtender {
         withVerifyRowsListener(new VerifyRowsResultRenderer());
         withRunListener(new RunResultRenderer());
         withDocumentParsingListener(new DocumentStructureImprover());
+        withDocumentParsingListener(new MetadataCreator());
         String stylesheetContent = IOUtil.readResourceAsString(EMBEDDED_STYLESHEET_RESOURCE);
         withEmbeddedCSS(stylesheetContent);
     }

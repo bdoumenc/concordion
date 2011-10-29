@@ -1,4 +1,4 @@
-package spec.concordion.command.results.stylesheet;
+package spec.concordion.command.results.contentType;
 
 import nu.xom.Element;
 
@@ -6,7 +6,7 @@ import org.concordion.integration.junit3.ConcordionTestCase;
 
 import test.concordion.TestRig;
 
-public class MissingHeadElementTest extends ConcordionTestCase {
+public class ContentTypeTest extends ConcordionTestCase {
 
     public String process(String html) {
         Element rootElement = new TestRig()
@@ -19,19 +19,12 @@ public class MissingHeadElementTest extends ConcordionTestCase {
 
     private void removeIrrelevantElements(Element rootElement) {
         removeIrrelevantStylesheet(rootElement);
-        removeIrrelevantMetadata(rootElement);
         removeIrrelevantFooter(rootElement);
     }
 
     private void removeIrrelevantStylesheet(Element rootElement) {
         Element head = rootElement.getFirstChildElement("head");
         Element style = head.getFirstChildElement("style");
-        head.removeChild(style);
-    }
-
-    private void removeIrrelevantMetadata(Element rootElement) {
-        Element head = rootElement.getFirstChildElement("head");
-        Element style = head.getFirstChildElement("meta");
         head.removeChild(style);
     }
 
