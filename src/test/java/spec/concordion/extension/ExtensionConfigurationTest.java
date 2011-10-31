@@ -15,7 +15,7 @@ import test.concordion.extension.fake.FakeExtensionBase;
 @RunWith(ConcordionRunner.class)
 public class ExtensionConfigurationTest {
 
-    private JavaSourceCompiler compiler = new JavaSourceCompiler();
+    private JavaSourceCompiler compiler;
     private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("class\\s*(.*?)\\s*(\\{|extends)");
 
     @After
@@ -28,16 +28,18 @@ public class ExtensionConfigurationTest {
     }
     
     public String process(String javaFragment) throws Exception {
+        compiler = new JavaSourceCompiler();
         String htmlFragment = "";
-        Object fixture = compileFixture(javaFragment);
+        Object fixture = compile(javaFragment);
         ProcessingResult result = process(htmlFragment, fixture);
         return result.getRootElement().getAttributeValue(FakeExtensionBase.FAKE_EXTENSION_ATTR_NAME);
     }
 
     public String process(String javaFragment1, String javaFragment2) throws Exception {
+        compiler = new JavaSourceCompiler();
         String htmlFragment = "";
-        compileFixture(javaFragment1);
-        Object fixture = compileFixture(javaFragment2);
+        compile(javaFragment1);
+        Object fixture = compile(javaFragment2);
         ProcessingResult result = process(htmlFragment, fixture);
         return result.getRootElement().getAttributeValue(FakeExtensionBase.FAKE_EXTENSION_ATTR_NAME);
     }
@@ -49,12 +51,9 @@ public class ExtensionConfigurationTest {
         return result;
     }
 
-    private Object compileFixture(String javaFragment) throws Exception, InstantiationException,
+    private Object compile(String javaSource) throws Exception, InstantiationException,
             IllegalAccessException {
-        String className = getClassName(javaFragment);
-        Class<?> clazz = compiler.compile(className, javaFragment);
-        Object fixture = clazz.newInstance();
-        return fixture;
+        return compiler.compile(getClassName(javaSource), javaSource).newInstance();
     }
 
     private String getClassName(String javaFragment) {
