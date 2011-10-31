@@ -4,7 +4,7 @@
     <artifactId>concordion</artifactId>
     <packaging>jar</packaging>
     <name>concordion</name>
-    <version>1.4.3-SNAPSHOT</version>
+    <version>1.4.2-SNAPSHOT</version>
     <url>http://www.concordion.org</url>
     <scm>
         <url>http://code.google.com/p/concordion/source/browse</url>
