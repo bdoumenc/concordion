@@ -24,7 +24,7 @@ public class FixtureExtensionLoader {
     public List<ConcordionExtension> getExtensionsForFixture(Object fixture) {
         final List<ConcordionExtension> extensions = new ArrayList<ConcordionExtension>();
 
-        List<Class<?>> classes = getClassHeirarchyParentFirst(fixture.getClass());
+        List<Class<?>> classes = getClassHierarchyParentFirst(fixture.getClass());
         
         for (Class<?> class1 : classes) {
             extensions.addAll(getExtensionsFromClassAnnotation(class1));
@@ -91,7 +91,7 @@ public class FixtureExtensionLoader {
      * Returns the specified class and all of its superclasses, excluding java.lang.Object,
      * ordered from the most super class to the specified class.
      */
-    private List<Class<?>> getClassHeirarchyParentFirst(Class<?> class1) {
+    private List<Class<?>> getClassHierarchyParentFirst(Class<?> class1) {
         ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
         Class<?> current = class1;
         while (current != null && current != Object.class) {
