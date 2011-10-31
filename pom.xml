@@ -124,6 +124,14 @@
     </properties>
   
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
+
         <plugins>
 
             <plugin>
@@ -157,13 +165,6 @@
                     <tagBase>https://concordion.googlecode.com/svn/tags/</tagBase>
                     <goals>source:jar javadoc:jar deploy</goals>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.wagon</groupId>
-                        <artifactId>wagon-webdav-jackrabbit</artifactId>
-                        <version>2.0</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             
             <plugin>
