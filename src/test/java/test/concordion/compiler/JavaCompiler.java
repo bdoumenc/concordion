@@ -24,7 +24,7 @@ public class JavaCompiler implements Compiler {
     public JavaCompiler() {
         systemJavaCompiler = ToolProvider.getSystemJavaCompiler();
         if (systemJavaCompiler == null) {
-            throw new CompilerNotAvailableException("Java compiler not available. Requires JDK1.6 (not a JRE)");
+            throw new CompilerNotAvailableException("Java compiler not available. Requires JDK1.6 or later (not a JRE)");
         }
         diagnosticCollector = new DiagnosticCollector();
         simulatedFileManager = new SimulatedFileManager(getStandardFileManager(diagnosticCollector));
