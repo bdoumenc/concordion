@@ -14,7 +14,6 @@ import org.concordion.api.listener.RunListener;
 import org.concordion.api.listener.SpecificationProcessingListener;
 import org.concordion.api.listener.ThrowableCaughtListener;
 import org.concordion.api.listener.VerifyRowsListener;
-import org.concordion.internal.ConcordionBuilder;
 
 /**
  * Allows {@link ConcordionExtension}s to add features to Concordion.
@@ -147,12 +146,12 @@ public interface ConcordionExtender {
      * @param source the new source 
      * @return this
      */
-    ConcordionBuilder withSource(Source source);
+    ConcordionExtender withSource(Source source);
 
     /**
      * Overrides the target that the Concordion specifications are written to.
      * @param source the new target 
      * @return this
      */
-    ConcordionBuilder withTarget(Target target);
+    ConcordionExtender withTarget(Target target);
 }
