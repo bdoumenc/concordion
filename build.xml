@@ -72,25 +72,7 @@ ensure compatibility with Java 5 libraries for the main classes.</fail>
         </copy>
     </target>
 
-    <target name="compile" depends="compile.main, compile.test">
-        <mkdir dir="${dir.classes}"/>
-
-        <javac classpathref="compile.classpath"
-               destdir="${dir.classes}"
-               srcdir="src/main/java:src/test/java"
-               debug="yes"
-               failonerror="yes"
-               source="1.5"
-               target="1.5"
-               includeantruntime="no"
-               bootclasspath="${java5.bootclasspath}"
-        />
-
-        <copy todir="${dir.classes}">
-            <fileset dir="src/main/resources" />
-            <fileset dir="src/test/resources" />
-        </copy>
-    </target>
+    <target name="compile" depends="compile.main, compile.test"/>
 
     <target name="run.tests" depends="compile">
         <mkdir dir="${dir.test.output}"/>
