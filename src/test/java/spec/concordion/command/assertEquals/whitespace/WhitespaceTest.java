@@ -1,8 +1,7 @@
 package spec.concordion.command.assertEquals.whitespace;
 
 import org.concordion.integration.junit3.ConcordionTestCase;
-import org.concordion.internal.BrowserStyleWhitespaceComparator;
-
+import org.concordion.internal.CatchAllExpectationChecker;
 import test.concordion.TestRig;
 
 public class WhitespaceTest extends ConcordionTestCase {
@@ -40,7 +39,7 @@ public class WhitespaceTest extends ConcordionTestCase {
     public String normalize(String s) {
         // Bit naughty calling internal method normalize() directly 
         return replaceRealWhitespaceCharactersWithNames(
-                BrowserStyleWhitespaceComparator.normalize(replaceNamedWhitespaceWithRealWhitespaceCharacters(s)));
+                CatchAllExpectationChecker.normalize(replaceNamedWhitespaceWithRealWhitespaceCharacters(s)));
     }
     
     private static String replaceNamedWhitespaceWithRealWhitespaceCharacters(String s) {
