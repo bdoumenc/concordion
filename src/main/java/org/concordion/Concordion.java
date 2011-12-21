@@ -10,6 +10,8 @@ import org.concordion.api.SpecificationLocator;
 import org.concordion.api.SpecificationReader;
 import org.concordion.internal.SummarizingResultRecorder;
 
+import android.content.Context;
+
 public class Concordion {
 
     private final SpecificationLocator specificationLocator;
@@ -22,12 +24,12 @@ public class Concordion {
         this.evaluatorFactory = evaluatorFactory;
     }
 
-    public ResultSummary process(Object fixture) throws IOException {
-        return process(specificationLocator.locateSpecification(fixture), fixture);
+    public ResultSummary process(Object fixture, Context context) throws IOException {
+        return process(specificationLocator.locateSpecification(fixture), fixture, context);
     }
 
-    public ResultSummary process(Resource resource, Object fixture) throws IOException {
-        Specification specification = specificationReader.readSpecification(resource);
+    public ResultSummary process(Resource resource, Object fixture, Context context) throws IOException {
+        Specification specification = specificationReader.readSpecification(resource, context);
         SummarizingResultRecorder resultRecorder = new SummarizingResultRecorder();
         specification.process(evaluatorFactory.createEvaluator(fixture), resultRecorder);
         return resultRecorder;

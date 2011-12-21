@@ -59,6 +59,9 @@ import org.concordion.internal.util.Announcer;
 import org.concordion.internal.util.Check;
 import org.concordion.internal.util.IOUtil;
 
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+
 public class ConcordionBuilder implements ConcordionExtender {
 
     private Announcer<ConcordionBuildListener> listeners = Announcer.to(ConcordionBuildListener.class);
@@ -68,7 +71,7 @@ public class ConcordionBuilder implements ConcordionExtender {
     private static final String PROPERTY_EXTENSIONS = "concordion.extensions";
     private static final String EMBEDDED_STYLESHEET_RESOURCE = "/org/concordion/internal/resource/embedded.css";
     
-    private SpecificationLocator specificationLocator = new ClassNameBasedSpecificationLocator();
+    private SpecificationLocator specificationLocator = new AndroidSpecificationLocator();
     private Source source = new ClassPathSource();
     private Target target = null;
     private CommandRegistry commandRegistry = new CommandRegistry();
@@ -109,7 +112,12 @@ public class ConcordionBuilder implements ConcordionExtender {
         withRunListener(new RunResultRenderer());
         withDocumentParsingListener(new DocumentStructureImprover());
         withDocumentParsingListener(new MetadataCreator());
-        String stylesheetContent = IOUtil.readResourceAsString(EMBEDDED_STYLESHEET_RESOURCE);
+//        String stylesheetContent = IOUtil.readResourceAsString(EMBEDDED_STYLESHEET_RESOURCE);
+//        withEmbeddedCSS(stylesheetContent);
+    }
+
+    public ConcordionBuilder(Context context) {
+        String stylesheetContent = IOUtil.readResourceAsString(context, "embedded.css");
         withEmbeddedCSS(stylesheetContent);
     }
 
@@ -319,7 +327,8 @@ public class ConcordionBuilder implements ConcordionExtender {
         }
         String outputPath = System.getProperty(PROPERTY_OUTPUT_DIR);
         if (outputPath == null) {
-            return new File(System.getProperty("java.io.tmpdir"), "concordion");
+            //return new File(System.getProperty("java.io.tmpdir"), "concordion");
+            return new File("/data/local/tmp", "concordion");
         }
         return new File(outputPath);
     }

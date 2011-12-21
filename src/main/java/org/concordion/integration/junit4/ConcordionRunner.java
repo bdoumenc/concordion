@@ -110,7 +110,7 @@ public class ConcordionRunner extends BlockJUnit4ClassRunner {
     protected Statement specExecStatement(final Object fixture) {
         return new Statement() {
             public void evaluate() throws Throwable {
-                result = new FixtureRunner().run(fixture);
+                result = new FixtureRunner().run(fixture, null);
             }
         };
     }

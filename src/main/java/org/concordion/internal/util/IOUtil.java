@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 
+import android.content.Context;
+
 public class IOUtil {
     
     private static final int BUFFER_SIZE = 4096;
@@ -19,24 +21,39 @@ public class IOUtil {
         }
     }
 
+    public static String readResourceAsString(Context context, String filename) {
+        InputStream resourceStream = null;
+        try {
+            resourceStream = context.getAssets().open(filename);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return readResourceAsString(resourceStream, "UTF-8");
+    }
+
     public static String readResourceAsString(String resourcePath) {
         return readResourceAsString(resourcePath, "UTF-8");
     }
 
     public static String readResourceAsString(String resourcePath, String charsetName) {
+        InputStream resourceStream = getResourceAsStream(resourcePath);
+        return readResourceAsString(resourceStream, charsetName);
+    }
+
+    public static String readResourceAsString(InputStream resource, String charsetName) {
         try {
-            InputStream in = getResourceAsStream(resourcePath);
-            if (in == null) {
+            if (resource == null) {
                 throw new IOException("Resource not found");
             }
-            Reader reader = new InputStreamReader(in, charsetName);
+            Reader reader = new InputStreamReader(resource, charsetName);
             try {
                 return readAsString(reader);
             } finally {
                 reader.close();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read resource '" + resourcePath + "'", e);
+            throw new RuntimeException("Failed to read resource", e);
         }
     }
     

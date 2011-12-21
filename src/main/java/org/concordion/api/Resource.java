@@ -23,7 +23,8 @@ public final class Resource {
     }
 
     public String getPath() {
-        return path;
+        return name;
+//        return path;
     }
 
     private boolean isPackage() {
